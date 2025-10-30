@@ -374,3 +374,590 @@ console.log(array);  // output : ['t','e','c','a']
 
 #### What is Array Destructuring in JS ?
 - Array destructuring allows you to extract elements from array and assigne them to individual  variables in asingle statement.
+- Array destructuring is introduced in ECMA script
+```javascript
+const fruits = ['apple','orange'.'banana'];
+const [firstfruit,secondfruit,thirdfruit] = fruits;
+console.log(firstfruit);    // output : apple
+console.log(secondfruit);   // output : orange
+console.log(thirdfruit);    // output : banana
+```
+
+#### What are array-like objects in JS ?
+- Array-like objects are objects which have indexed elements and a length property similar to arrays
+but they may not have all methods of arrays like push(), pop() and others
+- Example string, arguments, HTML collection
+```javascript
+// String
+let str = 'Hello';
+console.log(str);      // output : Hello
+console.log(str.length);  // output : 5
+console.log(str[0]);    // output : H
+```
+```javascript
+// Arguments object
+sum(1,2,3);
+function sum(){
+    console.log(arguments);  //output : [1,2,3]
+    console.log(arguments.length);  //output :  3
+    console.log(arguments[0]);  //output : 1
+}
+```
+```javascript
+// Accessing HTML collection
+var boxes = document.getElementByClassName('box');
+console.log(boxes.length);
+console.log(boxes[0]);
+```
+#### How to convert an array-like object into an array ?
+- There are 3 ways to convert an array-like object into an array
+   1. Array.from()
+```javascript
+ var arrayLike = {0:'a',1:'b',2:'c',length:3};
+ var array1 = Array.from(arrayLike);
+ console.log(array1);    //output : ['a','b','c']
+```
+   2. Spread syntax(...)
+```javascript
+ var arrayLike = {0:'a',1:'b',2:'c',length:3};
+ var array2 = (...arrayLike);
+ console.log(array2);    //output : ['a','b','c']
+```
+   3. Array.prototype.slice.call()
+```javascript
+ var arrayLike = {0:'a',1:'b',2:'c',length:3};
+ var array3 = Array.prototype.slice.call(arrayLike);
+ console.log(array3);    //output : ['a','b','c']
+```
+
+## What is loop ? what are type of loops in JS ?
+- loop is a programming way to run a peice of code repeatedly until a certain condition is met
+- Types of loop
+   1. for
+   - for loop allows to iterate a block of code a specific number of time.
+```javascript
+for(i = 0; i < 5; i++){
+    console.log(i);
+}
+//  output : 0,1,2,3,4
+```
+   2. while
+   - while loop excute a block of code while a certain condition is true
+```javascript
+let j = 5;
+while(j<5){
+    console.log(j);
+    j++;
+}
+```
+   3. do-while
+- do while loop is similar to the while loop except that the block of code is executed at least once even if the condotion is false.
+```javascript
+let k=0;
+do{
+    console.log(k);
+    k++;
+}while(k>1);  // output : 0
+```
+   4. for...of
+```javascript
+
+```
+   5. for...in
+```javascript
+
+```
+
+#### Difference between break and continue statement 
+- break statement is used to terminate the loop
+```javascript
+for(let i=1; i<= 5; i++){
+    if(i=== 3){
+        break;
+    }
+    console.log(i);
+}
+//  output : 1 2
+```
+- continue statement is used to skip the current iteration of the loop and move on to the next iteration.
+```javascript
+for(let i=1; i<= 5; i++){
+    if(i=== 3){
+        continue;
+    }
+    console.log(i);
+}
+//  output : 1 2 4 5
+```
+
+#### Difference between for and for...of loop
+- for loop is sligthly more complex having more lines of code whereas for of is much simpler and better for iterating arrays.
+```javascript
+let arr = [1,2,3];
+for(let i=0; i<= arr.length; i++){
+
+    console.log(arr[i]);
+}
+//  output : 1 2 3
+```
+```javascript
+// works for arrays and objects only.
+let arr = [1,2,3];
+for(let val of arr){
+
+    console.log(val);
+}
+//  output : 1 2 3
+```
+
+#### Difference between for..of and for..in loop
+
+- for...of loop is used to loop through the values of object like array and string
+- allows to access value directly without having to use index
+```javascript
+let arr = [1,2,3];
+for(let val of arr){
+    console.log(val);
+}
+//output : 1 2 3
+```
+
+- for...in loop is used to loop through the  properties of an object
+- allows you to iterate over the keys of an object.
+- use keys as index.
+```javascript
+const person = {
+    name : "Arati",
+    role : "Frontend Developer"
+};
+for(let  key in person){
+    console.log(person[key]);
+}
+//output : Arati Frontend Developer
+```
+
+#### What is forEach method ?
+- forEach is a method available on array or object that allows you to iterate over each element of the array and perform some action on each element.
+
+```javascript
+const arr = [1,2,3];
+array.forEach(function(item){
+    console.log(item)
+});
+// output :  1 2 3   
+```
+```javascript
+const person={
+    name : "arati",
+    role : "Developer"
+};
+Object.value(person).forEach(value => {
+    console.log(value);
+});
+// output :  arati Developer
+```
+
+#### When to use for...of loop and when to use forEach() method in application ?
+-   for..of loop is suitable when you need more control over the loop, such as using break statement or continue statement inside.
+- if we use break statement inside forEach loop we get Illigal break statement error
+- forEach method iterate over each element of an array and perform some action on each element.
+
+
+##  Functions :
+#### What are the functions in JS and types of functions ?
+- A function is reusable block of code that perform a specific task.
+- here is the list of types of functions
+
+1. Named function 
+- used for big and complex logic
+- use it when you want to reuse one function at multiple places
+```javascript
+function sum(a,b){
+    return a+b;
+};
+console.log(sum(2,5));
+// output : 7
+```
+
+2. Anonymous function
+- used for small logic
+- use it when you want to use a function at single place
+```javascript
+console.log(function(a,b){
+    return a*b;
+}(2,3));
+
+// output : 6
+```
+
+3. Function expression
+- An anonymous function is assigned to a variable
+- this can be named or anonymous but mostly they are used with anoonymous functions only
+```javascript
+const add = function(a,b){
+    return a+b;
+};
+console.log(add(2,3));
+// output : 5
+```
+
+4. Arrow function
+- shorter way of definig a function
+```javascript
+const add = (a,b) => a+b ;
+console.log(add(2,3));
+// output : 5
+```
+5. IIFE
+6. Callback function
+- A callback function is a function that is passed as an argument to another function.
+```javascript
+function add(x,y){
+    return x+y;
+}
+function display(x,y,operation){
+    var result = operation(x,y);
+    console.log(result);
+}
+display(3,4,add);
+
+// display(3,4,multiply);
+// display(3,4,subtract);
+// display(3,4,divide);
+```
+7. Higher order function
+- take one or more function as argument or return a function as result
+- above both are higher order function
+first takes function as an argumnet
+```javascript
+function  hof(func){
+    func(); 
+}
+
+hof(sayHello);
+function sayHello(){
+    console.log("Hello!");
+}
+
+// output : "Hello!"
+```
+second return a function
+```javascript
+function createAdder(number){
+    return function(value){
+        return value + number;
+    };
+}
+
+const addFive =  createAdder(5);
+
+console.log(addFive(2));
+// output : 7
+```
+
+#### What is the difference between arguments and parameters ?
+- Parameters are the placeholders defined in the function declaration
+```javascript
+// a and b are parameters
+function sum(a,b){
+    console.log(a+b);
+}
+```
+- Argumnets are the actual values passed to a function when it is called
+```javascript
+// 2 and 3 are arguments
+sum(2,3);
+```
+
+#### What is the use of event handling in JS ?
+- Event handling is the process of responding to users action on webpage.
+- The addEventListner method in JS allows attach an event name with function you want to perform on it
+```javascript
+<button id="myButton">click</button>
+
+const button = document.getElementById('myButton');
+
+button.addEventListner('click',function(){
+   alert("button clicked!");
+});
+```
+- Event types : click, mouseover, keydown, keyup, submit, focus, blur, change, load, resize
+
+#### What are First Class fucntion in JS ?
+- A programming language is said to have First-Class functions if functions in that language are treated like other variables.
+- function expression concept in javascript makes First Class function.
+
+#### What are pure and inpure function in JS ?
+- Pure function is the function which produce the same output for the same input.
+- can not have side effect 
+```javascript
+function add(a,b){
+   return a+b;
+}
+console.log(add(2,3));
+```
+
+- An impure function can produce different output for same input
+- can have side effects
+```javascript
+let total = 0;
+function addTototal(value){
+    total += value;
+    return total;
+}
+console.log(addTototal(5)); 
+```
+
+#### What is function Currying in JS ?
+- Currying in JS transforms afunction with multiple argument  into a nested series of functions, each taking a single argument.
+
+
+#### What are call, apply and bind in JS ?
+- These methods provide a way to manipulate the this value and pass argumnet to function.
+- call() accepts arguments individually, separated by commas, while apply() accepts arguments as an array.
+- call() and apply() execute the function immediately, while bind() returns a new function that needs to be invoked separately
+1. call() method
+```javascript
+const person={
+    firstName : "Peter",
+    lastName : "Jones"
+};
+function greet(city,country){
+    console.log(`Hello, ${this.firstName} ${this.lastName} from ${city} ${country}`);
+}
+greet.call(person,"New York","USA");
+// output : Hello, Peter Jones from New York USA
+
+```
+```javascript
+const person={
+    firstName : "Peter",
+    lastName : "Jones"
+};
+function greet(city,country){
+    console.log(`Hello, ${this.firstName} ${this.lastName} from ${city} ${country}`);
+}
+greet.apply(person,["New York","USA"]);
+// output : Hello, Peter Jones from New York USA
+```
+```javascript
+const person={
+    firstName : "Peter",
+    lastName : "Jones"
+};
+function greet(city,country){
+    console.log(`Hello, ${this.firstName} ${this.lastName} from ${city} ${country}`);
+}
+const boundGreet = greet.bind(person,"New York","USA");
+
+boundGreet(); 
+// output : Hello, Peter Jones from New York USA
+```
+
+#### What is a string ?
+- string is a data type used to store and manipulate data
+```javascript
+var str = 'Hello';
+```
+#### What are string literals and interpolation in strings
+- backticks are used to desfine template literals
+```javascript
+var myname = "Happy";
+var str = `Hello ${myname}`;
+console.log(str);
+```
+- here str is template literal 
+- ${myname} is template and Hello is literal
+- Some important string operations
+   substr(), indexOf(), trim(), substring(), includes(), charAt(), replace(), search(), slice(),
+   valueOf(), cancat(), split(), toLocaleLowerCase(), toString()
+
+
+#### What is string immutability ?
+- Strings in JS are considered immutable because you cannot modify the content of an existing string directly.
+- Every time you modify string it takes new memory
+
+#### how many ways you can concatenat strings ?
+1. + operator
+2. concat() method
+3. template literals
+4. join() method
+```javascript
+let str1 = 'Hello';
+let str2 = 'World';
+let strings = [str1,str2];
+let result = strings.join('');
+console.log(result);
+// output : 
+```
+
+# DOM and Difference between HTML and DOM
+- A tree like representation of a webpage that allows programming languages like JS to dynamically interact with and modify pages structure, content and style.
+- methods to select DOM elements
+  1. getElementById()
+  2. getElementByClassname()
+  3. getElementByTagName()
+  4. getElementByName()
+  5. querySelector
+  6. querySelectorAll
+
+- modifying element attributes and properties
+  1. textContent
+  2. innerHTML
+  3. setAttribute(name,value)
+  4. removeAttribute(name)
+  5. style.property
+
+- creating and appending elements
+  1. createElement(tagName)
+  2. appendChild(node)
+  3. cloneNode(deep)
+
+- Removing element
+  1. remove()
+  2. removeChild()
+
+- Adding and removing event listners
+  1. addEventListner(type,listner)
+  2. removeEventListner(type,listner)
+
+#### what are selectors in JS ?
+- Selector in JS help to get specific element from DOM based on IDs, class name or tag names
+- example :
+  1. getElementById()
+  2. getElementByClassname()
+  3. getElementByTagName()
+  4. getElementByName()
+  5. querySelector
+  6. querySelectorAll
+
+#### Difference between querySelector() and querySelectorAll()
+
+```javascript
+<body>
+<div class="myClass">Element 1</div>
+<div class="myClass">Element 2</div>
+<div class="myClass">Element 3</div>
+</body>
+
+var element = document.querySelector('.myClass');
+console.log(element.textContent);
+// output : Element 1
+// this returns the first element
+```
+
+```javascript
+<body>
+<div class="myClass">Element 1</div>
+<div class="myClass">Element 2</div>
+<div class="myClass">Element 3</div>
+</body>
+
+var elements = document.querySelectorAll('.myClass');
+console.log(elements.textContent);
+// output : Element 1, Element 2, Element 3
+// this returns all element
+```
+#### What are the methods to modify elements properties and attributes ?
+  1. textContent
+  2. innerHTML
+  3. setAttribute(name,value)
+  4. removeAttribute(name)
+  5. style.property
+  6. classList.add()
+
+#### What is the difference between innerHTML and textContent ?
+
+
+```javascript
+<body>
+<div id="myElement1">Hello</div>
+<div id="myElement2">World</div>
+</body>
+```
+
+```javascript
+var element1 = document.getElementById('myElement1');
+element1.textContent = '<strong>Hello</strong>';
+// output :  <strong>Hello</strong>
+```
+```javascript
+var element1 = document.getElementById('myElement1');
+element1.innerHTML = '<strong>Hello</strong>';
+// output : Hello                 (in bold font)
+```
+
+#### How to add or remove properties of HTML element in the DOM using JS ?
+
+```javascript
+<div id="myElement">Hello</div>
+
+var element = documnet.getElemetById("myElement");
+element.setAttribute("data-info","new value");
+
+// output
+<div id="myElement" data-info="new value">Hello</div>
+```
+
+```javascript
+<div id="myElement" data-info="new value">Hello</div>
+
+var element = documnet.getElemetById("myElement");
+element.setAttribute("data-info");
+
+// output :
+<div id="myElement">Hello</div>
+```
+
+#### How tp add and remove style from HTML elements in DOM using JS ?
+```javascript
+<div id="myElement">Hello world</div>
+
+var element = documnet.getElmentById('myElement');
+element.steProperty("color","red");
+// this will modify the style of element
+<div id="myElement" style="color : red;">Hello world</div>
+```
+```javascript
+<div id="myElement">Hello world</div>
+
+var element = documnet.getElmentById('myElement');
+element.classList.add('highlight');
+// output :
+<div id="myElement" class="highlight">Hello world</div>
+
+element.classList.remove('highlight');
+// output
+<div id="myElement">Hello world</div>
+
+
+// there is one more
+element.classList.toggle('highlight');
+```
+
+#### How to create new element in DOM using JS ? what is difference between createElement() and cloneNode() ?
+- creating and appending elements
+  1. createElement(tagName)
+  2. appendChild(node)
+  3. cloneNode(deep)
+
+```javascript
+   var newDiv = document.createElement('div');
+   newDiv.textContent = "this is new div";
+   document.body.appendChild(newDiv);
+
+// output :
+  <div>this is new div</div>
+```
+```javascript
+<div id="parentElement">
+<h1>Existing Element</h1>
+</div>
+
+var existingElement = document.getElementById('parentElement');
+var clonedElement = existingElement.cloneNode(true);
+clonedElement.textContent = "This is clone element";
+document.body.appendChild(clonedElement);
+// output :
+<div id="parentElement">Cloned element</div>
+```
