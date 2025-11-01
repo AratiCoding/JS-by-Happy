@@ -959,5 +959,442 @@ var clonedElement = existingElement.cloneNode(true);
 clonedElement.textContent = "This is clone element";
 document.body.appendChild(clonedElement);
 // output :
-<div id="parentElement">Cloned element</div>
+<div id="parentElement">Cloned element  </div>
 ```
+
+#### What is the difference between createElement() and createTextNode() ?
+```javascript
+var newDiv = document.createElement('div');
+newDiv.textContent = "Newly created div";
+documnet.body.appendChild(newDiv);
+// output :
+<div>Newly created div</div>
+```
+```javascript
+<div id="parentElement">
+<h1>Existing Element</h1>
+</div>
+
+var parentElement = documnet.getElemetById('parentElement');
+var newText = documnet.createTextNode("This is some text");
+parentElement.appendChild(newText);
+
+// output :
+<div id="parentElement">
+<h1>Existing Element</h1>
+"This is some text"
+</div>
+```
+
+#### What is error handling in JS ?
+- Error handling is the process of managing errors
+```javascript
+// try block contains the code that might throw an error
+try{
+    const result = someUndefinedVar + 10 ;
+    console.log(result);
+}catch(error){
+    // catch block is where the error is handled
+    console.log("An error occured",error.message);
+}
+
+// output :
+// An error occured : someUndefindVar is not defined
+```
+#### what is the role of finlly block in JS ?
+- finally block is used to execute some code irresoective of error.
+```javascript
+// try block contains the code that might throw an error
+try{
+    const result = someUndefinedVar + 10 ;
+    console.log(result);
+}catch(error){
+    // catch block is where the error is handled
+    console.log("An error occured",error.message);
+}finally{
+    // finally block to execute code regardless of wheather an error occured or not
+    console.log("finally block is executed");
+}
+
+// output :
+// An error occured : someUndefindVar is not defined
+// finally block is executed
+```
+#### what is the purpose of throw statement in JS ?
+- The throw statement stops the execution of current function and passes the error to the catch block of calling function.
+```javascript
+function userData(){
+    try{
+        validateUserAge(25);
+        validateUserAge('invalid');
+        validateUserAge(15);
+    }catch(error){
+        console.error("Error:",error.message);
+    }
+}
+
+function validateUserAge(age){
+    if(typeof age !== "number"){
+        throw new Error("Age must be a Number");
+    }
+    console.log("User age is valid");
+}
+```
+
+#### What is error propagation in JS ?
+- Error propagation refers to the process of passing an error from one part of the code to another by using the throw statement with try catch
+```javascript
+function userData(){
+    try{
+        validateUserAge(25);
+        validateUserAge('invalid');
+        validateUserAge(15);
+    }catch(error){
+        console.error("Error:",error.message);
+    }
+}
+
+function validateUserAge(age){
+    if(typeof age !== "number"){
+        throw new Error("Age must be a Number");
+    }
+    console.log("User age is valid");
+}
+```
+
+#### what are the best practices for error handling ?
+1. Always use try catch and handle errors appropriately
+2. Use descriptive error messages
+3. Avoid swallowing errors (never leave catch block empty)
+4. Log the errors properly  
+```javascript
+try{
+
+}catch(error){
+    console.error("error message",error);
+}
+```
+
+#### What are different types of error in JS ?
+1. Syntax error
+- missing paranthesis and similar
+```javascript
+console.log("this is the syntax error"
+```
+
+2. Reference error
+- Using some variable without declaring or defining
+```javascript
+console.log(myVar);
+// error :
+//  myVar is not defined
+```
+
+3. Type error
+```javascript
+const number = 7;
+console.log(number.toUpperCase());
+
+// error : 
+// number.toUpperCase() is not a function
+```
+4. range error
+```javascript
+const array = [1,2,3];
+console.log(array[10]);
+
+// error : 
+// index 10 is out of bounds
+```
+
+## Objects
+- An object is a data type that allows you to store key-value pairs
+- properties of an object can be string, number, boolean, undefined, null, function, array and another object
+
+#### In how many ways we can create an object ?
+1. Object literals 
+```javascript
+var person = {
+    name : "John",
+    age : 24,
+    role : "SOftware Developer"
+};
+console.log(person);
+```
+2. Object Constructor
+```javascript
+var person = new Object();
+person.name = "Krish";
+person.age = 20;
+person.role = "Web Developer";
+console.log(person);
+```
+3. Object.create() Method
+```javascript
+var person = {
+    name : "",
+    age : 0,
+    role : ""
+};
+ 
+var men = Object.create(person);
+men.name = "keshav";
+men.age = 24;
+men.role = "Developer";
+```
+
+#### What is the difference between an array and an object ?
+1. Arrays
+- collection of values
+- denoted by square brackets
+- ordered
+```javascript
+var arr = ["apple","banana","orange"];
+```
+
+2. Objects
+- collection of key-value pair
+- denoted by curly braces
+- unordered
+```javascript
+var person={
+    name : "Madhav",
+    age : 25,
+    role : "Software Developer"
+};
+```
+
+#### How to add or modify or delete properties from an object ?
+```javascript
+var person ={};
+// Adding properties
+person.name = "Krish";
+person.age = 20;
+person.role = "Web Developer";
+
+// modifying properties
+person.age = 25;
+
+// deleting properties
+delete person.age;
+```
+
+#### What is the difference between dot notation and bracket notation ?
+- both dot notation and bracket notation are used to access properties or method  of an object.
+- dot notation is more popular and used for its simplicity
+```javascript
+const person = {
+    name: 'happy',
+    age : 35,
+};
+console.log(person.name);
+console.log(person['name']);
+```
+
+- Limitation of dot noatation : In some scenarios bracket notation is the only option, such as when accessing properties when property name is stored in variable
+```javascript
+// Dynamically assgin property name to a variable 
+var propertyName = 'age';
+console.log(person[propertyName]);
+// output : '35'
+
+console.log(person.propertyName);
+//output : undefined
+```
+
+#### What are some common methods to iterate over the properties of an object ?
+- there are 4 ways
+1. for...in loop
+```javascript
+const person = {
+    name : "John",
+    age :30,
+};
+
+for(let prop in person){
+    console.log(prop + ": " + person[prop]);
+}
+// output :
+     name : "John"   age :30
+```
+
+2. Object.keys() & forEach()
+```javascript
+const person = {
+    name : "John",
+    age :30,
+};
+
+Object.keys(person).forEach((prop)=>{
+    console.log(prop + ": " + person[prop]);
+});
+// output :
+     name : "John"  age :30
+```
+
+3. Object.values() & forEach()
+```javascript
+const person = {
+    name : "John",
+    age :30,
+};
+
+Object.values(person).forEach((value)=>{
+    console.log(value + ": " + person[prop]);
+});
+// output :
+     name : "John"  age :30
+```
+
+#### How do you check if a property exist in an object ?
+1. in  operator
+```javascript
+var person = {
+    name : "Harry",
+    age : 24
+};
+
+console.log("name" in person);    // output : true
+console.log("name" in person);    // output : false
+```
+2. hasOwnproperty() method
+```javascript
+var person = {
+    name : "Harry",
+    age : 24
+};
+
+console.log(person.hasOwnProperty('name'));    // output : true
+console.log(person.hasOwnProperty('city'));    // output : false
+```
+3. Comparing with undefined
+```javascript
+var person = {
+    name : "Harry",
+    age : 24
+};
+
+console.log(person.name !== undefined);    // output : true
+console.log(person.age !== undefined);    // output : false
+```
+
+#### How do you clone or copy an object ?
+1. Using spread operator
+```javascript
+const originalObject = {
+    name :"Happy",
+    age : 30,
+    city : Jalna
+};
+const clonedObject =  {...originalObject};
+```
+2. Using Object.assign()
+```javascript
+const originalObject = {
+    name :"Happy",
+    age : 30,
+    city : Jalna
+};
+const clonedObject = Object.assign({},originalObject);
+```
+3. JSON.stringify() & JSON.parse()
+```javascript
+const originalObject = {
+    name :"Happy",
+    age : 30,
+    city : Jalna
+};
+const clonedObject = JSON.parse(JSON.stringify(originalObject));
+```
+
+#### What is the difference between deep copy and shallow copy in JS ?
+1. Shallow copy :
+```javascript
+conat person = {
+  name : "Happy",
+  age : 30,
+  address : {
+    city : "Jalna",
+    country : "India"
+  }
+};
+const shallowCopy = Object.assign({},person);
+shallowCopy.address.city = 'Mumbai';
+console.log(person.address.city);    // output : Mumbai
+console.log(shallowCopy.address.city);    // output : Mumbai
+```
+2. deep copy
+```javascript
+conat person = {
+  name : "Happy",
+  age : 30,
+  address : {
+    city : "Jalna",
+    country : "India"
+  }
+};
+const shallowCopy = Object.assign({},person);
+shallowCopy.address.city = 'Mumbai';
+console.log(person.address.city);    // output : Jalna
+console.log(shallowCopy.address.city);    // output : Mumbai
+```
+
+#### What is the set Object in JS ?
+- The Set object is a collection of unique values, meaning that duplicate values are not allowed.
+- Set provides methods for adding, deleting and checking the existance of value in the set.
+```javascript
+const uniqueNum = new Set();
+uniqueNum.add(5);
+uniqueNum.add(10);
+uniqueNum.add(5);
+console.log(uniqueNum);
+// output : {5, 10}
+
+console.log(uniqueNum.size);
+// output : 2
+
+console.log(uniqueNum.has(10));
+// output : true
+
+uniqueNum.delete(10);
+console.log(uniqueNum.size);
+// output : 1
+```
+- Set can be used to remove duplicate values from the arrays.
+```javascript
+let myarr = [1,2,3,4,3];
+let myset = new Set(myarr);
+let uniqueArr = [...myset];
+conssole.log(uniqueArr);
+// output : [1,2,3,4]
+```
+
+#### What is the Map object in JS ?
+- The Map object is a collection of key-value pairs where each key can be of any type and each value can also be of any type
+- Map maintains the order of key value pair
+
+```javascript
+const personDetails = new Map();
+personDetails.set("name","Alice");
+personDetails.set("age",30);
+
+console.log(personDetails.get("name"));
+// output : Alice
+console.log(personDetails.has("age"));
+// output : true
+
+personDetails.delete("age");
+console.log(personDetails.size);
+// output : 1
+```
+
+#### What is the difference between Map and Object in JS ?
+1. Map : 
+- keys can be of any data type, including strings, numbers, objects, functions
+- maintains the order of key-value pair 
+- Useful when keys are of different types
+    
+2. Object : 
+- keys are limited to strings and symbols
+- No guaranteed order of keys
+- Usefull when keys are strings or symbols
